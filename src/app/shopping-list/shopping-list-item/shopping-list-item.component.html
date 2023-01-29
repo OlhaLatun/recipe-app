@@ -1,0 +1,9 @@
+<a
+  class="list-group-item"
+  [style.background-color]="ingredient.key === focusedItem ? 'lightGray' : '#f7f7f7'"
+  (click)="onItemClick($event)"
+  [attr.data-key]="ingredient.key"
+>
+  {{ ingredient.key }} ({{ ingredient.value }})</a
+>
+

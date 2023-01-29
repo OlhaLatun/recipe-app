@@ -1,0 +1,17 @@
+<h2 class="text-primary">{{ title }}</h2>
+<div class="row">
+  <div class="col-xs-12" style="margin: 20px 0">
+    <button class="btn btn-success">New Recipe</button>
+  </div>
+  <div class="col-xs-6 text-left">
+    <recipe-item
+      *ngFor="let r of recipes"
+      [recipe]="r"
+      (RecipeItemEvent)="onRecipeClick($event)"
+    >
+    </recipe-item>
+  </div>
+  <div class="col-xs-6">
+    <recipe-detail [recipe]="clickedRecipe"></recipe-detail>
+  </div>
+</div>

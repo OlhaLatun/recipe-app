@@ -1,0 +1,14 @@
+<div class="row" style="margin: 20px 0">
+  <div class="col-xs-12">
+    <h1 class="text-primary">{{ title }}</h1>
+    <shopping-list-edit
+      (shoppinglistAddEvent)="addIngredient($event)"
+      (shoppinglistDeleteEvent)="deleteIngredient()"
+      (shoppinglistClearEvent)="clearIngredients()"
+    ></shopping-list-edit>
+    <hr />
+    <ul class="list-group"  *ngFor="let item of ingredients | keyvalue" >
+      <shopping-list-item [ingredient]="item" (ShoppingListItemEvent)="onListItemClick($event)"></shopping-list-item>
+    </ul>
+  </div>
+</div>
