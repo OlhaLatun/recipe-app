@@ -12,23 +12,41 @@ export class RecipeListComponent {
       'Tiramisu',
       'Delicious decert from Italia',
       'https://thumbs.dreamstime.com/b/tiramisu-blue-plate-32105094.jpg',
-      ['mascarpone', 'savoiardi', 'coffee', 'cream']
-    ), new Recipe(
+      [
+        { name: 'mascarpone', amount: 1 },
+        { name: 'savoiardi', amount: 1 },
+        { name: 'coffee', amount: 1 },
+        { name: 'cream', amount: 1 },
+      ]
+    ),
+    new Recipe(
       'Pizza',
       'What can be better than melting cheese?',
       'https://thumbs.dreamstime.com/z/pizza-rustic-italian-mozzarella-cheese-basil-leaves-35669930.jpg',
-      ['dough', 'mozarella', 'pomato sause', 'seasoning']
-    ),  new Recipe(
+      [
+        { name: 'dough', amount: 1 },
+        { name: 'mozarella', amount: 1 },
+        { name: 'tomato', amount: 1 },
+        { name: 'seasoning', amount: 1 },
+      ]
+    ),
+    new Recipe(
       'Lasagna',
       'Layers of divine taste',
       'https://thumbs.dreamstime.com/z/lasagna-5660129.jpg',
-      ['lasagna pasta', 'tomato sause', 'meat', 'beshamel', 'cheese']
-    )
+      [
+        { name: 'lasagna pasta', amount: 1 },
+        { name: 'tomato sause', amount: 1 },
+        { name: 'meat', amount: 1 },
+        { name: 'beshamel', amount: 1 },
+        { name: 'cheese', amount: 1 },
+      ]
+    ),
   ];
   clickedRecipe = this.recipes[0];
 
   onRecipeClick(recipe: string) {
-  const r = this.recipes.find(r => r.name === recipe)
-  this.clickedRecipe = r
+    const r = this.recipes.find((r) => r.name === recipe);
+    this.clickedRecipe = r;
   }
 }
