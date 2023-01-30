@@ -1,37 +1,36 @@
-import { Component }  from '@angular/core';
-
+import { Component } from '@angular/core';
+import { ShoppingListService } from './shopping-list.service';
 @Component({
   selector: 'shopping-list',
-  templateUrl: './shopping-list.component.html',
+  templateUrl: './shopping-list.component.html'
 })
 export class ShoppingListComponent {
   title = 'Shopping list';
   focusedItem: string;
-  ingredients = new Map();
+  ingredients: any;
+
+  constructor(private shoppingListService: ShoppingListService) {
+    this.shoppingListService.itemFocused.subscribe((item) => {
+      this.focusedItem = item
+    })
+  }
 
   ngOnInit() {
-    this.ingredients.set('pasta', 1)
-    this.ingredients.set('cheese', 1)
-    this.ingredients.set('meat', 1)
-    this.ingredients.set('tomatoes', 10)
+    this.shoppingListService.setIngredients();
+    this.ingredients = this.shoppingListService.ingredients;
   }
 
-  addIngredient({name, amount}) {
-    this.ingredients.set(name, amount)
-  }
-
-  onListItemClick(itemID: string) {
-    this.focusedItem = itemID
+  addIngredient({ name, amount }) {
+    this.shoppingListService.ingredients.set(name, amount);
   }
 
   deleteIngredient() {
-      if (this.focusedItem) {
-          this.ingredients.delete(this.focusedItem)
-      }
-  
+    if (this.focusedItem) {
+      this.shoppingListService.ingredients.delete(this.focusedItem);
+    }
   }
 
   clearIngredients() {
-    this.ingredients.clear()
+    this.shoppingListService.ingredients.clear();
   }
 }
