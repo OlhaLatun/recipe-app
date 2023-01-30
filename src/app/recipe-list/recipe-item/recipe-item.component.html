@@ -1,7 +1,7 @@
 <a
   href="#"
   class="list-group-item clearfix"
-  (click)="onRecipeItemClick(recipe.name)"
+  (click)="onRecipeItemClick()"
 >
   <div class="pull-left">
     <h4 class="list-group-utem-heading">{{ recipe.name }}</h4>
@@ -9,7 +9,7 @@
   </div>
   <span class="pull-right">
     <img
-      src="{{ recipe.imagePath }}"
+      [src]="recipe.imagePath"
       alt="pic"
       class="image-responsive"
       style="max-height: 50px"
