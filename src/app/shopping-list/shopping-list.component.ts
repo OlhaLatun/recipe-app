@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ShoppingListService } from './shopping-list.service';
 @Component({
   selector: 'shopping-list',
-  templateUrl: './shopping-list.component.html'
+  templateUrl: './shopping-list.component.html',
 })
 export class ShoppingListComponent {
   title = 'Shopping list';
@@ -11,8 +11,14 @@ export class ShoppingListComponent {
 
   constructor(private shoppingListService: ShoppingListService) {
     this.shoppingListService.itemFocused.subscribe((item) => {
-      this.focusedItem = item
-    })
+      this.focusedItem = item;
+    });
+
+    this.shoppingListService.ingredientsToAdd.subscribe((ingredients) => {
+      ingredients.forEach((item) =>
+        this.shoppingListService.addIngredient(item.name, item.amount)
+      );
+    });
   }
 
   ngOnInit() {
@@ -21,16 +27,16 @@ export class ShoppingListComponent {
   }
 
   addIngredient({ name, amount }) {
-    this.shoppingListService.ingredients.set(name, amount);
+    this.shoppingListService.addIngredient(name, amount);
   }
 
   deleteIngredient() {
     if (this.focusedItem) {
-      this.shoppingListService.ingredients.delete(this.focusedItem);
+      this.shoppingListService.deleteIngredient(this.focusedItem);
     }
   }
 
   clearIngredients() {
-    this.shoppingListService.ingredients.clear();
+    this.shoppingListService.clearList();
   }
 }
