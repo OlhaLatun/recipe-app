@@ -1,11 +1,6 @@
 <header class="text-center" (NavigationEvent)="navigate($event)"></header>
 <div class="container text-center">
   <div class="row">
-    <div class="col-xs-12" *ngIf="path === 'recepies'">
-      <recipe-list></recipe-list>
-    </div>
-    <div class="col-xs-12" *ngIf="path === 'shoppingList'">
-      <shopping-list></shopping-list>
-    </div>
+    <router-outlet></router-outlet>
   </div>
 </div>

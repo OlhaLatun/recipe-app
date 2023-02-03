@@ -13,7 +13,15 @@ import { RecipeDetailComponent } from './recipe-list/recipe-detail/recipe-detail
 import { HoverDirective } from './directives/hover.directive';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { RecipeService } from './recipe-list/recipe.service';
-import { ShoppingListService } from './shopping-list/shopping-list.service'
+import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component'
+
+const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'recipes', component: RecipeListComponent },
+  { path: 'shoppingList', component: ShoppingListComponent },
+];
 
 @NgModule({
   declarations: [
@@ -27,8 +35,9 @@ import { ShoppingListService } from './shopping-list/shopping-list.service'
     ShoppingListItemComponent,
     HoverDirective,
     DropdownDirective,
+    HomeComponent
   ],
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)],
   providers: [ShoppingListService, RecipeService],
   bootstrap: [AppComponent],
 })
