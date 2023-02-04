@@ -10,10 +10,4 @@ export class RecipeItemComponent {
   @Input() recipe: Recipe;
 
   constructor(private recipeService: RecipeService) {}
-  
-  onRecipeItemClick() {
-    this.recipeService.clickedRecipe.emit(this.recipe);
-  }
-
-
 }

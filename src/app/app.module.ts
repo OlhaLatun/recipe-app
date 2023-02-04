@@ -14,14 +14,8 @@ import { HoverDirective } from './directives/hover.directive';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { RecipeService } from './recipe-list/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
-import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component'
-
-const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'recipes', component: RecipeListComponent },
-  { path: 'shoppingList', component: ShoppingListComponent },
-];
+import { AppRouterModule } from './modules/router.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +31,7 @@ const appRoutes: Routes = [
     DropdownDirective,
     HomeComponent
   ],
-  imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)],
+  imports: [BrowserModule, FormsModule, AppRouterModule],
   providers: [ShoppingListService, RecipeService],
   bootstrap: [AppComponent],
 })

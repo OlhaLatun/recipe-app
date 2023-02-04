@@ -7,6 +7,7 @@ import { Ingredient } from '../shopping-list/ingredient.model';
 export class RecipeService {
   recipes: Recipe[] = [
     new Recipe(
+      1,
       'Tiramisu',
       'Delicious decert from Italia',
       'https://thumbs.dreamstime.com/b/tiramisu-blue-plate-32105094.jpg',
@@ -18,6 +19,7 @@ export class RecipeService {
       ]
     ),
     new Recipe(
+      2,
       'Pizza',
       'What can be better than melting cheese?',
       'https://thumbs.dreamstime.com/z/pizza-rustic-italian-mozzarella-cheese-basil-leaves-35669930.jpg',
@@ -29,6 +31,7 @@ export class RecipeService {
       ]
     ),
     new Recipe(
+      3,
       'Lasagna',
       'Layers of divine taste',
       'https://thumbs.dreamstime.com/z/lasagna-5660129.jpg',
@@ -49,5 +52,9 @@ export class RecipeService {
     ingredients.forEach((item) =>
       this.shopListService.addIngredient(item.name, item.amount)
     );
+  }
+
+  getRecipeById(id: number) {
+    return this.recipes.find(recipe => recipe.id === id)
   }
 }

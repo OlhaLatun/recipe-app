@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'recipe-detail',
@@ -10,14 +11,11 @@ export class RecipeDetailComponent {
   title = 'Recipe Detail';
   recipe: Recipe;
 
-  constructor(private recipeService: RecipeService) {
-    this.recipeService.clickedRecipe.subscribe((item) => {
-      this.recipe = item;
-    });
-  }
-
-  ngOnInit() {
-    this.recipe = this.recipeService.recipes[0];
+  constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
+  this.route.params.subscribe(() => {
+    const recipeId = this.route.snapshot.params['id'] 
+    this.recipe = this.recipeService.getRecipeById(+recipeId)
+  })
   }
 
   addToShoppingList(event) {

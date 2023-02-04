@@ -1,7 +1,6 @@
 <a
-  href="#"
+  [routerLink]="['recipe', recipe.id]"
   class="list-group-item clearfix"
-  (click)="onRecipeItemClick()"
 >
   <div class="pull-left">
     <h4 class="list-group-utem-heading">{{ recipe.name }}</h4>
