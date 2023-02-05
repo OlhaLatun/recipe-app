@@ -14,8 +14,9 @@ import { HoverDirective } from './directives/hover.directive';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { RecipeService } from './recipe-list/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
-import { HomeComponent } from './home/home.component'
+import { HomeComponent } from './home/home.component';
 import { AppRouterModule } from './modules/router.module';
+import { RecipeEditComponent } from './recipe-list/recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AppRouterModule } from './modules/router.module';
     ShoppingListItemComponent,
     HoverDirective,
     DropdownDirective,
-    HomeComponent
+    HomeComponent,
+    RecipeEditComponent
   ],
   imports: [BrowserModule, FormsModule, AppRouterModule],
   providers: [ShoppingListService, RecipeService],

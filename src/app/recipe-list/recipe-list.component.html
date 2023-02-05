@@ -1,13 +1,12 @@
 <h2 class="text-primary">{{ title }}</h2>
 <div class="row">
   <div class="col-xs-12" style="margin: 20px 0">
-    <button class="btn btn-success">New Recipe</button>
+    <button class="btn btn-success" routerLink="create">New Recipe</button>
   </div>
   <div class="col-xs-6 text-left">
     <recipe-item *ngFor="let r of recipes" [recipe]="r"></recipe-item>
   </div>
   <div class="col-xs-6">
-    <p *ngIf="!recipeCLicked"> Please, choose recipe</p>
     <router-outlet></router-outlet>
   </div>
 </div>

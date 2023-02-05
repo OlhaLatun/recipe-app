@@ -17,8 +17,8 @@ export class RecipeDetailComponent {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(() => {
-      const recipeId = this.route.snapshot.params['id'];
+    this.route.params.subscribe((params) => {
+      const recipeId = params['id'];
       this.recipe = this.recipeService.getRecipeById(+recipeId);
       this.recipeService.clickedRecipe.emit(this.recipe);
     });

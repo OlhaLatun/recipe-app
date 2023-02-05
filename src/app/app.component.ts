@@ -10,8 +10,4 @@ import { ShoppingListService } from './shopping-list/shopping-list.service'
 })
 export class AppComponent {
  path: string = 'recepies';
-
-  navigate(path) {
-    this.path = path
-  }
 }
