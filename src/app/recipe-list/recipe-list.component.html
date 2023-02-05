@@ -7,6 +7,7 @@
     <recipe-item *ngFor="let r of recipes" [recipe]="r"></recipe-item>
   </div>
   <div class="col-xs-6">
+    <p *ngIf="!recipeCLicked"> Please, choose recipe</p>
     <router-outlet></router-outlet>
   </div>
 </div>

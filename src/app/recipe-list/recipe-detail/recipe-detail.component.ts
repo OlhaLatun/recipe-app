@@ -11,11 +11,17 @@ export class RecipeDetailComponent {
   title = 'Recipe Detail';
   recipe: Recipe;
 
-  constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
-  this.route.params.subscribe(() => {
-    const recipeId = this.route.snapshot.params['id'] 
-    this.recipe = this.recipeService.getRecipeById(+recipeId)
-  })
+  constructor(
+    private recipeService: RecipeService,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    this.route.params.subscribe(() => {
+      const recipeId = this.route.snapshot.params['id'];
+      this.recipe = this.recipeService.getRecipeById(+recipeId);
+      this.recipeService.clickedRecipe.emit(this.recipe);
+    });
   }
 
   addToShoppingList(event) {

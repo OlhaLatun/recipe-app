@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Recipe } from './recipe.model';
 import { RecipeService } from './recipe.service';
 
@@ -8,16 +9,15 @@ import { RecipeService } from './recipe.service';
 })
 export class RecipeListComponent {
   title = 'Recipe List';
-  clickedRecipe = this.recipeService.recipes[0];
+  recipeCLicked: Recipe;
   recipes: Recipe[];
 
-  constructor(private recipeService: RecipeService) {
-    this.recipeService.clickedRecipe.subscribe((recipe) => {
-      this.clickedRecipe = recipe
-    })
-  }
+  constructor(private recipeService: RecipeService) {}
 
   ngOnInit() {
     this.recipes = this.recipeService.recipes;
+    this.recipeService.clickedRecipe.subscribe((recipe) => {
+      this.recipeCLicked = recipe 
+    })
   }
 }
