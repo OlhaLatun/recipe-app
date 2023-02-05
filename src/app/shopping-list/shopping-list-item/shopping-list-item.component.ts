@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
@@ -9,15 +10,19 @@ export class ShoppingListItemComponent {
   focusedItem: string;
   @Input() ingredient: { key: string; value: number };
   @Output() ShoppingListItemEvent = new EventEmitter<string>();
+  subscription: Subscription;
 
   constructor(private ShoppingListSertice: ShoppingListService) {
-    this.ShoppingListSertice.itemFocused.subscribe((item) => {
+    this.subscription = this.ShoppingListSertice.itemFocused.subscribe((item) => {
         this.focusedItem = item
     })
   }
 
   onItemClick({ target }) {
-    this.ShoppingListSertice.itemFocused.emit(target.dataset.key); 
+    this.ShoppingListSertice.itemFocused.next(target.dataset.key); 
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
   }
 
 }

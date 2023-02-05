@@ -45,7 +45,6 @@ export class RecipeService {
     ),
   ];
 
-  clickedRecipe = new EventEmitter<Recipe>();
   constructor(private shopListService: ShoppingListService) {}
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {

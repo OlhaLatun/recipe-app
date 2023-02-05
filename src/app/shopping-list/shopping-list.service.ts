@@ -1,10 +1,10 @@
-import { EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Ingredient } from './ingredient.model';
 
 export class ShoppingListService {
   ingredients = new Map();
-  itemFocused = new EventEmitter<string>();
-  ingredientsToAdd = new EventEmitter<Ingredient[]>();
+  itemFocused = new Subject<string>();
+  ingredientsToAdd = new Subject<Ingredient[]>();
 
   setIngredients() {
     this.ingredients.set('pasta', 1);

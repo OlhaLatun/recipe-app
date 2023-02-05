@@ -20,7 +20,6 @@ export class RecipeDetailComponent {
     this.route.params.subscribe((params) => {
       const recipeId = params['id'];
       this.recipe = this.recipeService.getRecipeById(+recipeId);
-      this.recipeService.clickedRecipe.emit(this.recipe);
     });
   }
 
