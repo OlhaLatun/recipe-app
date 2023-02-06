@@ -45,6 +45,7 @@ export class RecipeService {
     ),
   ];
 
+  recipesChanges = new EventEmitter<void>
   constructor(private shopListService: ShoppingListService) {}
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
@@ -55,6 +56,10 @@ export class RecipeService {
 
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe)
+  }
+  deleteRecipe(id: number) {
+    this.recipes = this.recipes.filter(recipe => recipe.id !== id)
+    this.recipesChanges.emit()
   }
 
   getRecipeById(id: number) {

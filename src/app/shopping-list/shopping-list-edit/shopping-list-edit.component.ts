@@ -18,7 +18,6 @@ export class ShoppingListEditComponent {
   @ViewChild('form') slForm: NgForm;
 
   addIngredient() {
-    console.log(this.slForm)
     if (this.slForm.touched) {
       this.shoppinglistAddEvent.emit({
         name: this.slForm.value.name,

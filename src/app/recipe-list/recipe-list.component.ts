@@ -15,5 +15,8 @@ export class RecipeListComponent {
 
   ngOnInit() {
     this.recipes = this.recipeService.recipes;
+    this.recipeService.recipesChanges.subscribe(() => {
+      this.recipes = this.recipeService.recipes;
+    });
   }
 }
