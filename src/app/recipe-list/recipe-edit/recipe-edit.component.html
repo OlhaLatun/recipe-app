@@ -17,7 +17,10 @@
       formControlName="description"
     />
     <span
-      *ngIf="!recipeForm.get('description').valid && recipeForm.get('description').touched"
+      *ngIf="
+        !recipeForm.get('description').valid &&
+        recipeForm.get('description').touched
+      "
       class="text-danger"
       >The field is required</span
     >
@@ -31,10 +34,12 @@
       formControlName="imgPath"
     />
     <span
-    *ngIf="!recipeForm.get('imgPath').valid && recipeForm.get('imgPath').touched"
-    class="text-danger"
-    >The field is required</span
-  >
+      *ngIf="
+        !recipeForm.get('imgPath').valid && recipeForm.get('imgPath').touched
+      "
+      class="text-danger"
+      >The field is required</span
+    >
   </div>
   <div class="form-group" formArrayName="ingredients">
     <div>
@@ -69,10 +74,28 @@
       </div>
     </div>
     <span
-    *ngIf="!recipeForm.get('ingredients').valid && recipeForm.get('ingredients').touched"
-    class="text-danger"
-    >The field is required</span
-  >
+      *ngIf="
+        !recipeForm.get('ingredients').valid &&
+        recipeForm.get('ingredients').touched
+      "
+      class="text-danger"
+      >The field is required</span
+    >
   </div>
-  <button class="btn btn-success" type="submit" [disabled]="!recipeForm.valid">Add new recipe</button>
+  <button
+    *ngIf="!editModeItemId; else updateBtn"
+    class="btn btn-success"
+    type="submit"
+    [disabled]="!recipeForm.valid"
+  >
+    Add new recipe
+  </button>
+  <ng-template #updateBtn>
+    <button
+      class="btn btn-success"
+      type="submit"
+      [disabled]="!recipeForm.valid"
+    >
+      Update recipe
+    </button></ng-template>
 </form>
