@@ -1,1 +1,37 @@
-<p>edit recipe</p>
+<form (ngSubmit)="onFormSubmit(form)" #form="ngForm">
+  <div class="form-group text-left">
+    <label for="name">Name</label>
+    <input class="form-control" type="text" name="name" id="name" ngModel />
+  </div>
+  <div class="form-group text-left">
+    <label for="description">Description</label>
+    <input
+      class="form-control"
+      type="text"
+      name="description"
+      id="description"
+      ngModel
+    />
+  </div>
+  <div class="form-group text-left">
+    <label for="imagePath">Link to Image</label>
+    <input
+      class="form-control"
+      type="text"
+      name="imagePath"
+      id="imagePath"
+      ngModel
+    />
+  </div>
+  <div class="form-group text-left">
+    <label for="ingredients">Ingredients</label>
+    <textarea
+      class="form-control"
+      type="text"
+      name="ingredients"
+      id="ingredients"
+      ngModel
+    ></textarea>
+  </div>
+  <button class="btn btn-success" type="submit">Add new recipe</button>
+</form>

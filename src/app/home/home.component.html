@@ -1,3 +1,16 @@
-<h1 class="text-success">Welcome</h1>
-<p>Manage your recipes, collect unique ideas and become pro-chef!</p>
-<img class="image-responsive" src="https://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/mb_story-ratatouille_launch_2x?fit=constrain&cropN=0,0,1,1&fmt=jpeg&qlt=90&wid=1200"/>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6">
+      <h1 class="text-success">Welcome</h1>
+      <p>Manage your recipes, collect unique ideas and become pro-chef!</p>
+      <img
+        class="image-responsive"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAQmzhuYL6ejBWNnSGMcYUvWExZiryr4e_Yw&usqp=CAU"
+      />
+    </div>
+    <div class="col-xs-6">
+      <button class="btn btn-primary" routerLink="login">Login</button>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

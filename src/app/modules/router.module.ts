@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from '../directives/login/login.component';
 import { HomeComponent } from '../home/home.component';
 import { RecipeDetailComponent } from '../recipe-list/recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from '../recipe-list/recipe-edit/recipe-edit.component';
@@ -10,6 +11,7 @@ const appRoutes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    children: [{ path: 'login', component: LoginComponent }],
   },
   {
     path: 'recipes',

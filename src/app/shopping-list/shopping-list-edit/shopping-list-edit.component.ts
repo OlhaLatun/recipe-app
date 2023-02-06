@@ -1,33 +1,38 @@
-import { Component, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
-import { Ingredient } from '../ingredient.model';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'shopping-list-edit',
   templateUrl: './shopping-list-edit.component.html',
 })
 export class ShoppingListEditComponent {
- 
   @Output() shoppinglistAddEvent = new EventEmitter<object>();
   @Output() shoppinglistDeleteEvent = new EventEmitter<void>();
   @Output() shoppinglistClearEvent = new EventEmitter<void>();
-  @ViewChild('ingredientName') ingredientName: ElementRef 
-  @ViewChild('ingredientAmount') ingredientAmount: ElementRef 
+  @ViewChild('form') slForm: NgForm;
 
-  onAddIngredient(event) {
-    event.preventDefault();
-    if (this.ingredientName.nativeElement.value && this.ingredientAmount.nativeElement.value) {
-       this.shoppinglistAddEvent.emit({
-        name: this.ingredientName.nativeElement.value,
-        amount: this.ingredientAmount.nativeElement.value
-       })
+  addIngredient() {
+    console.log(this.slForm)
+    if (this.slForm.touched) {
+      this.shoppinglistAddEvent.emit({
+        name: this.slForm.value.name,
+        amount: this.slForm.value.amount,
+      });
     }
+    this.slForm.reset();
   }
 
   onDeleteIngredient() {
-   this.shoppinglistDeleteEvent.emit()
+    this.shoppinglistDeleteEvent.emit();
   }
 
   onClearList() {
-    this.shoppinglistClearEvent.emit()
+    this.shoppinglistClearEvent.emit();
   }
 }
