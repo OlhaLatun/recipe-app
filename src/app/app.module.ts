@@ -17,7 +17,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { HomeComponent } from './home/home.component';
 import { AppRouterModule } from './modules/router.module';
 import { RecipeEditComponent } from './recipe-list/recipe-edit/recipe-edit.component';
-import { LoginComponent } from './directives/login/login.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({

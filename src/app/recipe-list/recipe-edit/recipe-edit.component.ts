@@ -22,6 +22,7 @@ export class RecipeEditComponent {
     )
 
     this.recipeService.addRecipe(newRecipe)
+    this.recipeForm.reset()
   }
 
   ngOnInit() {
@@ -38,7 +39,7 @@ export class RecipeEditComponent {
   }
   addIngredientForm() {
     const control = new FormGroup({
-      name: new FormControl(''),
+      name: new FormControl('', Validators.required),
       amount: new FormControl('', Validators.required),
     });
     (<FormArray>this.recipeForm.get('ingredients')).push(control);
