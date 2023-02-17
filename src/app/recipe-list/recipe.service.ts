@@ -57,6 +57,11 @@ export class RecipeService {
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe)
   }
+
+  updateRecipe(idx: number, newRecipe: Recipe){
+    this.recipes[idx] = newRecipe
+  }
+
   deleteRecipe(id: number) {
     this.recipes = this.recipes.filter(recipe => recipe.id !== id)
     this.recipesChanges.emit()
