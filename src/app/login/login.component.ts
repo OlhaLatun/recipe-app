@@ -17,6 +17,7 @@ export class LoginComponent {
   @ViewChild('form') form: NgForm;
 
   constructor(private router: Router) {}
+  
   onSubmit() {
     if (this.form.valid) {
       this.router.navigate(['recipes']);

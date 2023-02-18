@@ -8,6 +8,4 @@ import { ShoppingListService } from './shopping-list/shopping-list.service'
   styleUrls: ['./app.component.css'],
   providers: [ShoppingListService, RecipeService],
 })
-export class AppComponent {
- path: string = 'recepies';
-}
+export class AppComponent {}
