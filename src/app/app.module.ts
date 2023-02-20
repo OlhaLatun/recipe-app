@@ -18,7 +18,8 @@ import { HomeComponent } from './home/home.component';
 import { AppRouterModule } from './modules/router.module';
 import { RecipeEditComponent } from './recipe-list/recipe-edit/recipe-edit.component';
 import { LoginComponent } from './login/login.component';
-
+import { ReversePipe } from './pipes/reverse.pipe'
+import { SortPipe } from './pipes/sort.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import { LoginComponent } from './login/login.component';
     DropdownDirective,
     HomeComponent,
     RecipeEditComponent,
-    LoginComponent
+    LoginComponent,
+    ReversePipe,
+    SortPipe
   ],
   imports: [BrowserModule, FormsModule, AppRouterModule, ReactiveFormsModule],
   providers: [ShoppingListService, RecipeService],
