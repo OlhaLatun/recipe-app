@@ -1,9 +1,9 @@
 <a
   class="list-group-item"
-  [style.background-color]="ingredient.key === focusedItem ? 'lightGray' : '#f7f7f7'"
+  [style.background-color]="ingredient.name === focusedItem ? 'lightGray' : '#f7f7f7'"
   (click)="onItemClick($event)"
-  [attr.data-key]="ingredient.key"
+  [attr.data-key]="ingredient.name"
 >
-  {{ ingredient.key }} ({{ ingredient.value }})</a
+  {{ ingredient.name | titlecase }} ({{ ingredient.amount }})</a
 >
 

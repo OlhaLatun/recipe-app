@@ -6,6 +6,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ShoppingListAPIService } from 'src/app/services/shoppingList.api.service';
 
 @Component({
   selector: 'shopping-list-edit',
@@ -17,12 +18,15 @@ export class ShoppingListEditComponent {
   @Output() shoppinglistClearEvent = new EventEmitter<void>();
   @ViewChild('form') slForm: NgForm;
 
+  constructor(private api: ShoppingListAPIService) {}
+
   addIngredient() {
     if (this.slForm.touched) {
-      this.shoppinglistAddEvent.emit({
+      const item = {
         name: this.slForm.value.name,
         amount: this.slForm.value.amount,
-      });
+      }
+      this.shoppinglistAddEvent.emit(item);
     }
     this.slForm.reset();
   }

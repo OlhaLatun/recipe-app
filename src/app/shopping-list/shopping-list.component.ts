@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { ShoppingListService } from './shopping-list.service';
+import { ShoppingListService } from '../services/shopping-list.service';
+import { ShoppingListAPIService } from '../services/shoppingList.api.service';
+import { Ingredient } from './ingredient.model';
+
 @Component({
   selector: 'shopping-list',
   templateUrl: './shopping-list.component.html',
@@ -7,36 +10,42 @@ import { ShoppingListService } from './shopping-list.service';
 export class ShoppingListComponent {
   title = 'Shopping list';
   focusedItem: string;
-  ingredients: any;
+  ingredients: Ingredient[] = [];
 
-  constructor(private shoppingListService: ShoppingListService) {
-    this.shoppingListService.itemFocused.subscribe((item) => {
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private api: ShoppingListAPIService
+  ) {
+    this.shoppingListService.focusedItem.subscribe((item) => {
       this.focusedItem = item;
     });
 
-    this.shoppingListService.ingredientsToAdd.subscribe((ingredients) => {
-      ingredients.forEach((item) =>
-        this.shoppingListService.addIngredient(item.name, item.amount)
-      );
+    this.shoppingListService.ingredientsChanged.subscribe((data) => {
+      if (!this.ingredients.length) {
+        this.shoppingListService.setIngredients(data);
+        this.ingredients = data;
+      } else {
+        this.ingredients = this.shoppingListService.getIngredients();
+      }
     });
   }
 
   ngOnInit() {
-    this.shoppingListService.setIngredients();
-    this.ingredients = this.shoppingListService.ingredients;
+    this.shoppingListService.fetchIngredients();
   }
 
-  addIngredient({ name, amount }) {
-    this.shoppingListService.addIngredient(name, amount);
+  addIngredient(item: { name: string; amount: number }) {
+    const ingredient = new Ingredient(item.name, item.amount);
+    this.shoppingListService.addIngredient(ingredient);
   }
 
   deleteIngredient() {
     if (this.focusedItem) {
-      this.shoppingListService.deleteIngredient(this.focusedItem);
+      this.shoppingListService.deleteIngrdient(this.focusedItem);
     }
   }
 
   clearIngredients() {
-    this.shoppingListService.clearList();
+    this.shoppingListService.clearList()
   }
 }

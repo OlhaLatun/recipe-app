@@ -7,7 +7,7 @@
       (shoppinglistClearEvent)="clearIngredients()"
     ></shopping-list-edit>
     <hr />
-    <ul class="list-group" *ngFor="let item of ingredients | keyvalue | sort:'key'">
+    <ul class="list-group" *ngFor="let item of ingredients | sort:'name'">
       <shopping-list-item [ingredient]="item"></shopping-list-item>
     </ul>
   </div>

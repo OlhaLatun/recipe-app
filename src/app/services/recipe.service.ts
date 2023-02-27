@@ -1,7 +1,8 @@
-import { Recipe } from './recipe.model';
+import { Recipe } from '../recipe-list/recipe.model';
 import { EventEmitter, Injectable } from '@angular/core';
-import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { ShoppingListService } from './shopping-list.service';
 import { Ingredient } from '../shopping-list/ingredient.model';
+import { ShoppingListAPIService } from './shoppingList.api.service';
 
 @Injectable()
 export class RecipeService {
@@ -46,11 +47,11 @@ export class RecipeService {
   ];
 
   recipesChanges = new EventEmitter<void>
-  constructor(private shopListService: ShoppingListService) {}
+  constructor(private shopListService: ShoppingListService, private api: ShoppingListAPIService) {}
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
     ingredients.forEach((item) =>
-      this.shopListService.addIngredient(item.name, item.amount)
+      this.api.postShoppingListItem(item)
     );
   }
 

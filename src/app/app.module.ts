@@ -12,14 +12,16 @@ import { RecipeItemComponent } from './recipe-list/recipe-item/recipe-item.compo
 import { RecipeDetailComponent } from './recipe-list/recipe-detail/recipe-detail.component';
 import { HoverDirective } from './directives/hover.directive';
 import { DropdownDirective } from './directives/dropdown.directive';
-import { RecipeService } from './recipe-list/recipe.service';
-import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { RecipeService } from './services/recipe.service';
+import { ShoppingListService } from './services/shopping-list.service';
 import { HomeComponent } from './home/home.component';
 import { AppRouterModule } from './modules/router.module';
 import { RecipeEditComponent } from './recipe-list/recipe-edit/recipe-edit.component';
 import { LoginComponent } from './login/login.component';
 import { ReversePipe } from './pipes/reverse.pipe'
 import { SortPipe } from './pipes/sort.pipe';
+import { HttpClientModule } from '@angular/common/http';
+import { ShoppingListAPIService } from './services/shoppingList.api.service';
 
 @NgModule({
   declarations: [
@@ -39,8 +41,8 @@ import { SortPipe } from './pipes/sort.pipe';
     ReversePipe,
     SortPipe
   ],
-  imports: [BrowserModule, FormsModule, AppRouterModule, ReactiveFormsModule],
-  providers: [ShoppingListService, RecipeService],
+  imports: [BrowserModule, FormsModule, AppRouterModule, ReactiveFormsModule, HttpClientModule],
+  providers: [ShoppingListService, RecipeService, ShoppingListAPIService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

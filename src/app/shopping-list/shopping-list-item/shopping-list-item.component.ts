@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ShoppingListService } from '../shopping-list.service';
+import { ShoppingListService } from '../../services/shopping-list.service';
+import { Ingredient } from '../ingredient.model';
 
 @Component({
   selector: 'shopping-list-item',
@@ -8,19 +9,20 @@ import { ShoppingListService } from '../shopping-list.service';
 })
 export class ShoppingListItemComponent {
   focusedItem: string;
-  @Input() ingredient: { key: string; value: number };
+  @Input() ingredient: Ingredient;
   @Output() ShoppingListItemEvent = new EventEmitter<string>();
   subscription: Subscription;
 
   constructor(private ShoppingListSertice: ShoppingListService) {
-    this.subscription = this.ShoppingListSertice.itemFocused.subscribe((item) => {
+    this.subscription = this.ShoppingListSertice.focusedItem.subscribe((item) => {
         this.focusedItem = item
     })
   }
 
   onItemClick({ target }) {
-    this.ShoppingListSertice.itemFocused.next(target.dataset.key); 
+    this.ShoppingListSertice.focusedItem.next(target.dataset.key); 
   }
+  
   ngOnDestroy() {
     this.subscription.unsubscribe()
   }
