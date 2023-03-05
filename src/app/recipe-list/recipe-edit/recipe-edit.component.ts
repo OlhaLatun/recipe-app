@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../../services/recipe.service';
-import { RecipeAPIService } from 'src/app/services/recipe.api.service';
+import { RecipeAPIService } from 'src/app/services/api/recipe.api.service';
 
 @Component({
   selector: 'recipe-edit',

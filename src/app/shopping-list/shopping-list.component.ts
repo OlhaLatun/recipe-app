@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ShoppingListService } from '../services/shopping-list.service';
-import { ShoppingListAPIService } from '../services/shoppingList.api.service';
+import { ShoppingListAPIService } from '../services/api/shoppingList.api.service';
 import { Ingredient } from './ingredient.model';
 
 @Component({

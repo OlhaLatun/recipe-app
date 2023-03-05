@@ -21,7 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { ReversePipe } from './pipes/reverse.pipe'
 import { SortPipe } from './pipes/sort.pipe';
 import { HttpClientModule } from '@angular/common/http';
-import { ShoppingListAPIService } from './services/shoppingList.api.service';
+import { ShoppingListAPIService } from './services/api/shoppingList.api.service';
 
 @NgModule({
   declarations: [

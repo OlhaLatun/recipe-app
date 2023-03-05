@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Ingredient } from '../shopping-list/ingredient.model';
-import { ShoppingListAPIService } from './shoppingList.api.service';
+import { ShoppingListAPIService } from './api/shoppingList.api.service';
 
 @Injectable({ providedIn: 'root' })
 export class ShoppingListService {

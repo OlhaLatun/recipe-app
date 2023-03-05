@@ -6,7 +6,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ShoppingListAPIService } from 'src/app/services/shoppingList.api.service';
+import { ShoppingListAPIService } from 'src/app/services/api/shoppingList.api.service';
 
 @Component({
   selector: 'shopping-list-edit',

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Recipe } from '../recipe-list/recipe.model';
+import { Recipe } from '../../recipe-list/recipe.model';
 
 const url = 'https://recipe-app-c2b4b-default-rtdb.firebaseio.com';
 
@@ -32,7 +32,7 @@ export class RecipeAPIService {
       [item.id]: {
         name: item.name,
         description: item.description,
-        imagePath: item.imgPath,
+        imagePath: item.imagePath,
         ingredients: item.ingredients,
       },
     };
