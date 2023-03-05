@@ -22,7 +22,6 @@ export class ShoppingListComponent {
 
     this.shoppingListService.ingredientsChanged.subscribe((data) => {
       if (!this.ingredients.length) {
-        this.shoppingListService.setIngredients(data);
         this.ingredients = data;
       } else {
         this.ingredients = this.shoppingListService.getIngredients();
@@ -41,11 +40,11 @@ export class ShoppingListComponent {
 
   deleteIngredient() {
     if (this.focusedItem) {
-      this.shoppingListService.deleteIngrdient(this.focusedItem);
+      this.shoppingListService.deleteIngredient(this.focusedItem);
     }
   }
 
   clearIngredients() {
-    this.shoppingListService.clearList()
+    this.shoppingListService.clearList();
   }
 }

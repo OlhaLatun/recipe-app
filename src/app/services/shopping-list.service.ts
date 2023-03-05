@@ -26,11 +26,8 @@ export class ShoppingListService {
       )
       .subscribe((ingredients) => {
         this.ingredientsChanged.next(ingredients);
+        this.ingredients = ingredients;
       });
-  }
-
-  setIngredients(data) {
-    this.ingredients = data;
   }
 
   getIngredients() {
@@ -59,20 +56,20 @@ export class ShoppingListService {
     }
   }
 
-  deleteIngrdient(name) {
+  deleteIngredient(name: string) {
     const id = this.ingredients.find(
       (item) => item.name.toLowerCase() === name.toLowerCase()
     ).id;
     this.api.deleteShoppingListItem(id);
-  
+
     const filtered = this.ingredients.filter((item) => item.name !== name);
     this.ingredients = filtered;
     this.ingredientsChanged.next(filtered);
   }
 
   clearList() {
-    this.ingredients = []
-    this.ingredientsChanged.next(this.ingredients)
-    this.api.clearShoppingList()
+    this.ingredients = [];
+    this.ingredientsChanged.next(this.ingredients);
+    this.api.clearShoppingList();
   }
 }

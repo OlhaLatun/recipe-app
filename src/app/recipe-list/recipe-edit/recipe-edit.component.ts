@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
+
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../../services/recipe.service';
+import { RecipeAPIService } from 'src/app/services/recipe.api.service';
 
 @Component({
   selector: 'recipe-edit',
@@ -16,35 +19,41 @@ export class RecipeEditComponent {
 
   constructor(
     private recipeService: RecipeService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private api: RecipeAPIService
   ) {}
 
   onSubmit() {
     if (this.editMode) {
-      let recipe = this.createRecipe()
-      recipe.id = +this.id
-      this.recipeService.updateRecipe(+this.id - 1, recipe);
+      let recipe = this.createRecipe(this.id);
+      this.recipeService.updateRecipe(this.id, recipe);
+      this.recipeForm.reset();
     } else {
-      this.recipeService.addRecipe(this.createRecipe());
+      this.api
+        .postRecipe(this.createRecipe())
+        .pipe(map((response) => response['name']))
+        .subscribe((id) => {
+          const newItem = this.createRecipe(id);
+          this.recipeService.addRecipe(newItem);
+          this.recipeForm.reset();
+        });
     }
-
-    this.recipeForm.reset();
   }
 
-  createRecipe() {
+  createRecipe(id?: string) {
     return new Recipe(
-      this.recipeService.recipes.length + 1,
       this.recipeForm.value.name,
       this.recipeForm.value.description,
       this.recipeForm.value.imgPath,
-      this.recipeForm.value.ingredients
+      this.recipeForm.value.ingredients,
+      id
     );
   }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'] || null;
     this.editMode = !!this.id;
-    this.recipeToEdit = this.recipeService.getRecipeById(+this.id);
+    this.recipeToEdit = this.recipeService.getRecipeById(this.id);
 
     this.initForm();
   }
@@ -93,6 +102,6 @@ export class RecipeEditComponent {
   }
 
   deleteIngredient(idx: number) {
-    (<FormArray>this.recipeForm.get('ingredients')).removeAt(idx)
+    (<FormArray>this.recipeForm.get('ingredients')).removeAt(idx);
   }
 }

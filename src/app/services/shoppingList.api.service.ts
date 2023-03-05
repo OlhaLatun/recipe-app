@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ShoppingListService } from './shopping-list.service';
-import { map } from 'rxjs/operators';
-import { Ingredient } from '../shopping-list/ingredient.model';
 
 const url = 'https://recipe-app-c2b4b-default-rtdb.firebaseio.com';
 

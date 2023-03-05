@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { RecipeService } from '../services/recipe.service';
+import { RecipeAPIService } from '../services/recipe.api.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'recipe-list',
@@ -9,14 +11,17 @@ import { RecipeService } from '../services/recipe.service';
 export class RecipeListComponent {
   title = 'Recipe List';
   recipeCLicked: Recipe;
-  recipes: Recipe[];
+  recipes: Recipe[] = [];
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(
+    private recipeService: RecipeService,
+  ) {}
 
   ngOnInit() {
-    this.recipes = this.recipeService.recipes;
-    this.recipeService.recipesChanges.subscribe(() => {
-      this.recipes = this.recipeService.recipes;
+    this.recipeService.setRecipes()
+
+    this.recipeService.recipesChanges.subscribe((recipes) => {
+      this.recipes = recipes;
     });
   }
 }
