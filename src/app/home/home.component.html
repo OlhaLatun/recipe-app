@@ -7,6 +7,11 @@
         class="image-responsive"
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAQmzhuYL6ejBWNnSGMcYUvWExZiryr4e_Yw&usqp=CAU"
       />
+      <div>
+        <button type="button" (click)="saveToLocalStorage()">Set item</button>
+        <button type="button" (click)="getFromLocalStorage()">Get item</button>
+        <p>{{ result }}</p>
+      </div>
     </div>
     <div class="col-xs-6">
       <button class="btn btn-primary" routerLink="login">Login</button>
