@@ -1,6 +1,7 @@
-<form #form="ngForm" (ngSubmit)="onSubmit()" style="margin-top: 20px">
+<div class="text-left" style="margin: 0 auto; width: 60%;">
+  <form #form="ngForm" (ngSubmit)="onSubmit()" style="margin-top: 20px">
   <div class="form-group">
-    <label for="email">Enter your email: </label>
+    <label for="email">Enter your email </label>
     <input
       type="email"
       class="form-control"
@@ -15,7 +16,7 @@
     >
   </div>
   <div class="form-group">
-    <label for="password">Enter your password: </label>
+    <label for="password">Enter your password </label>
     <input
       type="password"
       class="form-control"
@@ -29,16 +30,12 @@
       >Please, enter valid password</span
     >
   </div>
-  <div class="form-group">
-    <label for="subscription">Choose your subscription</label>
-    <select class="form-control" name="subscription" [ngModel]="'premium'">
-      <option value="basic">Basic</option>
-      <option value="standard">Standard</option>
-      <option value="premium">Premium</option>
-    </select>
-  </div>
+
   <div *ngIf="form.submitted && !form.valid" class="text-danger">
     It seems you've missed something
   </div>
-  <button type="submit" class="btn btn-success">GO!</button>
+  <button type="submit" class="btn btn-success" [disabled]='!form.valid'>{{ isLoginMode ? 'Login' : 'Sign up'  }} </button> |
+  <button type="button" class="btn btn-primary" (click)="switchMode()"> Switch to {{ isLoginMode ? 'Sign up' : 'Login'  }} </button>
 </form>
+</div>
+

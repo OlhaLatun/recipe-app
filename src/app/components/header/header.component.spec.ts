@@ -8,8 +8,8 @@ import { By } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import { HeaderComponent } from './header.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { RecipeListComponent } from '../recipe-list/recipe-list.component';
-import { ShoppingListComponent } from '../shopping-list/shopping-list.component';
+import { RecipeListComponent } from '../../components/recipe-list/recipe-list.component';
+import { ShoppingListComponent } from '../../components/shopping-list/shopping-list.component';
 import { HomeComponent } from '../home/home.component';
 
 describe('Header component', () => {

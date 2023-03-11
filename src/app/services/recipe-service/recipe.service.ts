@@ -1,9 +1,9 @@
-import { Recipe } from '../recipe-list/recipe.model';
+import { Recipe } from '../../models/recipe.model';
 import { EventEmitter, Injectable } from '@angular/core';
-import { ShoppingListService } from './shopping-list.service';
-import { Ingredient } from '../shopping-list/ingredient.model';
-import { ShoppingListAPIService } from './api/shoppingList.api.service';
-import { RecipeAPIService } from './api/recipe.api.service';
+import { ShoppingListService } from '../shopping-list-service/shopping-list.service';
+import { Ingredient } from '../../models/ingredient.model';
+import { ShoppingListAPIService } from '../api/shoppingList.api.service';
+import { RecipeAPIService } from '../api/recipe.api.service';
 import { Subject } from 'rxjs';
 
 @Injectable()

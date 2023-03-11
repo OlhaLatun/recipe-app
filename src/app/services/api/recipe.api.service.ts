@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Recipe } from '../../recipe-list/recipe.model';
+import { Recipe } from '../../models/recipe.model';
 
 const url = 'https://recipe-app-c2b4b-default-rtdb.firebaseio.com';
 

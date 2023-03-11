@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ShoppingListService } from '../../services/shopping-list.service';
-import { Ingredient } from '../ingredient.model';
+import { ShoppingListService } from '../../../services/shopping-list-service/shopping-list.service';
+import { Ingredient } from '../../../models/ingredient.model';
 
 @Component({
   selector: 'shopping-list-item',

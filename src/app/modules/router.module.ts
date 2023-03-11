@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from '../login/login.component';
-import { HomeComponent } from '../home/home.component';
-import { RecipeDetailComponent } from '../recipe-list/recipe-detail/recipe-detail.component';
-import { RecipeEditComponent } from '../recipe-list/recipe-edit/recipe-edit.component';
-import { RecipeListComponent } from '../recipe-list/recipe-list.component';
-import { ShoppingListComponent } from '../shopping-list/shopping-list.component';
+import { HomeComponent } from '../components/home/home.component';
+import { RecipeDetailComponent } from '../components/recipe-list/recipe-detail/recipe-detail.component';
+import { RecipeEditComponent } from '../components/recipe-list/recipe-edit/recipe-edit.component';
+import { RecipeListComponent } from '../components/recipe-list/recipe-list.component';
+import { ShoppingListComponent } from '../components/shopping-list/shopping-list.component'
+import { AuthComponent } from '../components/auth/auth.component';
 
 const appRoutes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    children: [{ path: 'login', component: LoginComponent }],
   },
+  { path: 'auth', component: AuthComponent },
   {
     path: 'recipes',
     component: RecipeListComponent,

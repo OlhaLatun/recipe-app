@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ShoppingListService } from '../services/shopping-list.service';
-import { ShoppingListAPIService } from '../services/api/shoppingList.api.service';
-import { Ingredient } from './ingredient.model';
+import { ShoppingListService } from '../../services/shopping-list-service/shopping-list.service';
+import { ShoppingListAPIService } from '../../services/api/shoppingList.api.service';
+import { Ingredient } from '../../models/ingredient.model';
 
 @Component({
   selector: 'shopping-list',

@@ -3,8 +3,8 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 
-import { Recipe } from '../recipe.model';
-import { RecipeService } from '../../services/recipe.service';
+import { Recipe } from '../../../models/recipe.model';
+import { RecipeService } from '../../../services/recipe-service/recipe.service';
 import { RecipeAPIService } from 'src/app/services/api/recipe.api.service';
 
 @Component({

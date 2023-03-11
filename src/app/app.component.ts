@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { RecipeService } from './services/recipe.service';
-import { ShoppingListService } from './services/shopping-list.service'
+import { RecipeService } from './services/recipe-service/recipe.service';
+import { ShoppingListService } from './services/shopping-list-service/shopping-list.service'
 
 @Component({
   selector: 'app-root',
