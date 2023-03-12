@@ -7,8 +7,14 @@
       (shoppinglistClearEvent)="clearIngredients()"
     ></shopping-list-edit>
     <hr />
-    <ul class="list-group" *ngFor="let item of ingredients | sort:'name'">
-      <shopping-list-item [ingredient]="item"></shopping-list-item>
-    </ul>
+    <div *ngIf="isLoading">
+      <loader></loader>
+    </div>
+    <div class="alert alert-danger" *ngIf="isError">{{ isError }}</div>
+    <div *ngIf="!isLoading && !isError">
+      <ul class="list-group" *ngFor="let item of ingredients | sort : 'name'">
+        <shopping-list-item [ingredient]="item"></shopping-list-item>
+      </ul>
+    </div>
   </div>
 </div>

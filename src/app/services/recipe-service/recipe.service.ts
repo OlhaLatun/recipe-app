@@ -49,6 +49,9 @@ export class RecipeService {
   ];
 
   recipesChanges = new Subject<Recipe[]>();
+  isLoading = new Subject<boolean>()
+  isError = new Subject<string>()
+
   constructor(
     private shopListService: ShoppingListService,
     private slApi: ShoppingListAPIService,
@@ -56,9 +59,14 @@ export class RecipeService {
   ) {}
 
   setRecipes() {
+    this.isLoading.next(true)
     this.recipeApi.getRecipes().subscribe((data) => {
       this.recipes = data;
       this.recipesChanges.next(data);
+      this.isLoading.next(false)
+    }, error => {
+      this.isLoading.next(false)
+      this.isError.next(error.error)
     });
   }
 

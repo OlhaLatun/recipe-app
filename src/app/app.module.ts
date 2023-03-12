@@ -22,6 +22,7 @@ import { SortPipe } from './pipes/sort.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { ShoppingListAPIService } from './services/api/shoppingList.api.service';
 import { AuthComponent } from './components/auth/auth.component';
+import {  LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AuthComponent } from './components/auth/auth.component';
     RecipeEditComponent,
     AuthComponent,
     ReversePipe,
-    SortPipe
+    SortPipe,
+    LoadingSpinnerComponent
   ],
   imports: [BrowserModule, FormsModule, AppRouterModule, ReactiveFormsModule, HttpClientModule],
   providers: [ShoppingListService, RecipeService, ShoppingListAPIService],

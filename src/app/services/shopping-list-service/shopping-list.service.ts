@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {  Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Ingredient } from '../../models/ingredient.model';
@@ -9,10 +9,12 @@ export class ShoppingListService {
   ingredients: Ingredient[] = [];
   focusedItem = new Subject<string>();
   ingredientsChanged = new BehaviorSubject(this.ingredients);
-
+  isLoading = new Subject<boolean>()
+  isError = new Subject<string>()
   constructor(private api: ShoppingListAPIService) {}
 
   fetchIngredients() {
+    this.isLoading.next(true)
     this.api
       .getShoppingListIems()
       .pipe(
@@ -27,6 +29,11 @@ export class ShoppingListService {
       .subscribe((ingredients) => {
         this.ingredientsChanged.next(ingredients);
         this.ingredients = ingredients;
+        this.isLoading.next(false)
+      }, 
+      error => {
+        this.isLoading.next(false)
+        this.isError.next(error.error)
       });
   }
 

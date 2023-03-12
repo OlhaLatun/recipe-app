@@ -1,5 +1,9 @@
 <h2 class="text-primary">{{ title }}</h2>
-<div class="row">
+<div *ngIf="isLoading">
+  <loader></loader>
+</div>
+<div class="alert alert-danger"  role="alert" *ngIf="isError"> {{ isError }} </div>
+<div class="row" *ngIf="!isLoading && !isError">
   <div class="col-xs-12" style="margin: 20px 0">
     <button class="btn btn-success" routerLink="create">New Recipe</button>
   </div>

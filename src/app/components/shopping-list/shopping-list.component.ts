@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ShoppingListService } from '../../services/shopping-list-service/shopping-list.service';
-import { ShoppingListAPIService } from '../../services/api/shoppingList.api.service';
 import { Ingredient } from '../../models/ingredient.model';
 
 @Component({
@@ -11,14 +10,24 @@ export class ShoppingListComponent {
   title = 'Shopping list';
   focusedItem: string;
   ingredients: Ingredient[] = [];
+  isLoading: boolean = false
+  isError: string = null
 
   constructor(
     private shoppingListService: ShoppingListService,
-    private api: ShoppingListAPIService
   ) {
     this.shoppingListService.focusedItem.subscribe((item) => {
       this.focusedItem = item;
     });
+
+    this.shoppingListService.isLoading.subscribe(status => {
+      this.isLoading = status
+    })
+
+    this.shoppingListService.isError.subscribe(error => {
+      this.isError = error['error']
+    })
+
 
     this.shoppingListService.ingredientsChanged.subscribe((data) => {
       if (!this.ingredients.length) {
@@ -27,6 +36,8 @@ export class ShoppingListComponent {
         this.ingredients = this.shoppingListService.getIngredients();
       }
     });
+
+
   }
 
   ngOnInit() {

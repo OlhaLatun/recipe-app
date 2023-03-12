@@ -1,41 +1,64 @@
-<div class="text-left" style="margin: 0 auto; width: 60%;">
-  <form #form="ngForm" (ngSubmit)="onSubmit()" style="margin-top: 20px">
-  <div class="form-group">
-    <label for="email">Enter your email </label>
-    <input
-      type="email"
-      class="form-control"
-      name="email"
-      ngModel
-      required
-      #email="ngModel"
-      email
-    />
-    <span *ngIf="email.touched && !email.valid" class="text-danger"
-      >Please, enter valid email</span
-    >
+<div class="text-left" style="margin: 0 auto; width: 60%">
+  <div *ngIf="isLoading">
+    <loader></loader>
   </div>
-  <div class="form-group">
-    <label for="password">Enter your password </label>
-    <input
-      type="password"
-      class="form-control"
-      name="password"
-      ngModel
-      required
-      password
-      #password="ngModel"
-    />
-    <span *ngIf="password.touched && !password.valid" class="text-danger"
-      >Please, enter valid password</span
-    >
-  </div>
+  <form
+    #form="ngForm"
+    (ngSubmit)="onSubmit()"
+    style="margin-top: 20px"
+    *ngIf="!isLoading"
+  >
+    <div class="form-group">
+      <label for="email">Enter your email </label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        ngModel
+        required
+        #email="ngModel"
+        email
+      />
+      <span *ngIf="email.touched && !email.valid" class="text-danger"
+        >Please, enter valid email</span
+      >
+    </div>
+    <div class="form-group">
+      <label for="password">Enter your password </label>
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        ngModel
+        required
+        password
+        #password="ngModel"
+      />
+      <span *ngIf="password.touched && !password.valid" class="text-danger"
+        >Please, enter valid password</span
+      >
+    </div>
 
-  <div *ngIf="form.submitted && !form.valid" class="text-danger">
-    It seems you've missed something
+    <div *ngIf="form.submitted && !form.valid" class="text-danger">
+      It seems you've missed something
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!form.valid">
+      {{ isLoginMode ? "Login" : "Sign up" }}
+    </button>
+    |
+    <button type="button" class="btn btn-primary" (click)="switchMode()">
+      Switch to {{ isLoginMode ? "Sign up" : "Login" }}
+    </button>
+  </form>
+  <div
+    class="alert alert-danger"
+    style="margin-top: 10px;"
+    role="alert"
+    *ngIf="isError"
+  >
+    <strong>Error</strong>: {{ isError }}
+    <button type="button" class="close" (click)="closeAlert()">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-  <button type="submit" class="btn btn-success" [disabled]='!form.valid'>{{ isLoginMode ? 'Login' : 'Sign up'  }} </button> |
-  <button type="button" class="btn btn-primary" (click)="switchMode()"> Switch to {{ isLoginMode ? 'Sign up' : 'Login'  }} </button>
-</form>
 </div>
-
