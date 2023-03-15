@@ -1,10 +1,11 @@
 import { Recipe } from '../../models/recipe.model';
-import { EventEmitter, Injectable } from '@angular/core';
+import {  Injectable } from '@angular/core';
 import { ShoppingListService } from '../shopping-list-service/shopping-list.service';
 import { Ingredient } from '../../models/ingredient.model';
 import { ShoppingListAPIService } from '../api/shoppingList.api.service';
 import { RecipeAPIService } from '../api/recipe.api.service';
 import { Subject } from 'rxjs';
+import { AuthService } from '../auth-service/auth.service';
 
 @Injectable()
 export class RecipeService {
@@ -55,7 +56,8 @@ export class RecipeService {
   constructor(
     private shopListService: ShoppingListService,
     private slApi: ShoppingListAPIService,
-    private recipeApi: RecipeAPIService
+    private recipeApi: RecipeAPIService,
+    private auth: AuthService
   ) {}
 
   setRecipes() {
