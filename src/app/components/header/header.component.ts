@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
   ],
 })
 export class HeaderComponent {
-  title = 'Recipe Book';
+  title = 'My Recipe Book';
   userSub: Subscription;
   isAuthenticated = false;
 
