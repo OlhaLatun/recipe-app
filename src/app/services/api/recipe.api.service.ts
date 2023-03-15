@@ -1,30 +1,45 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { exhaustMap, map, take } from 'rxjs/operators';
 import { Recipe } from '../../models/recipe.model';
+import { AuthService } from '../auth-service/auth.service';
 
 const url = 'https://recipe-app-c2b4b-default-rtdb.firebaseio.com';
 
 @Injectable({ providedIn: 'root' })
 export class RecipeAPIService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
   postRecipe(recipe: Recipe) {
-    return this.http.post(`${url}/recipes.json`, recipe);
+    return this.auth.user.pipe(
+      take(1),
+      exhaustMap((user) => {
+        const options = {
+          params: new HttpParams().set('auth', user.token),
+        };
+        return this.http.post(`${url}/recipes.json`, recipe, options);
+      })
+    );
   }
 
   getRecipes() {
-   return this.http
-      .get<Recipe[]>(`${url}/recipes.json`)
-      .pipe(
-        map((response) => {
-          const recipes = [];
-          for (let item in response) {
-            recipes.push({ id: item, ...response[item] });
-          }
-          return recipes;
-        }))
-      
+    return this.auth.user.pipe(
+      take(1),
+      exhaustMap((user) => {
+        const options = {
+          params: new HttpParams().set('auth', user.token),
+        };
+        return this.http.get<Recipe[]>(`${url}/recipes.json`, options);
+      }),
+      map((response) => {
+        const recipes = [];
+        for (let item in response) {
+          recipes.push({ id: item, ...response[item] });
+        }
+        return recipes;
+      })
+    );
   }
 
   updateRecipeItem(item) {
@@ -36,10 +51,31 @@ export class RecipeAPIService {
         ingredients: item.ingredients,
       },
     };
-    this.http.patch(`${url}/recipes.json`, body).subscribe();
+
+    this.auth.user
+      .pipe(
+        take(1),
+        exhaustMap((user) => {
+          const options = {
+            params: new HttpParams().set('auth', user.token),
+          };
+          return this.http.patch(`${url}/recipes.json`, body, options);
+        })
+      )
+      .subscribe();
   }
 
   deleteRecipeItem(id: string) {
-    this.http.delete(`${url}/recipes/${id}.json`).subscribe();
+    this.auth.user
+      .pipe(
+        take(1),
+        exhaustMap((user) => {
+          const options = {
+            params: new HttpParams().set('auth', user.token),
+          };
+          return this.http.delete(`${url}/recipes/${id}.json`, options);
+        })
+      )
+      .subscribe();
   }
 }
