@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { BehaviorSubject, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { User } from 'src/app/models/user.model';
 
 const SIGN_IN_URL =
   'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAqQ3PoUYc1vP4TofpGUsuf1D5C6ozM2R0';
@@ -20,6 +21,8 @@ export interface AuthResponseData {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  user = new BehaviorSubject<User>(null);
+
   constructor(private http: HttpClient) {}
 
   signIn(email: string, password: string) {
@@ -29,10 +32,14 @@ export class AuthService {
       returnSecureToken: true,
     };
 
-    return this.http
-      .post<AuthResponseData>(SIGN_IN_URL, body)
-      .pipe(catchError(this.handleError));
+    return this.http.post<AuthResponseData>(SIGN_IN_URL, body).pipe(
+      catchError(this.handleError),
+      tap((res) =>
+        this.handleAuth(res.email, res.localId, res.idToken, +res.expiresIn)
+      )
+    );
   }
+
   register(email: string, password: string) {
     const body = {
       email,
@@ -40,9 +47,24 @@ export class AuthService {
       returnSecureToken: true,
     };
 
-    return this.http
-      .post<AuthResponseData>(REGISTER_URL, body)
-      .pipe(catchError(this.handleError));
+    return this.http.post<AuthResponseData>(REGISTER_URL, body).pipe(
+      catchError(this.handleError),
+      tap((res) =>
+        this.handleAuth(res.email, res.localId, res.idToken, +res.expiresIn)
+      )
+    );
+  }
+
+  private handleAuth(
+    email: string,
+    localId: string,
+    idToken: string,
+    expiresIn: number
+  ) {
+    const currentDate = new Date();
+    const expirationDate = new Date(currentDate.getTime() + expiresIn);
+    const user = new User(email, localId, idToken, expirationDate);
+    this.user.next(user);
   }
 
   private handleError(errorRes: HttpErrorResponse) {

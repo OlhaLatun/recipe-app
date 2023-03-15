@@ -6,10 +6,7 @@
     <div class="navbar-collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li>
-          <a 
-          routerLink="/recipes" 
-          routerLinkActive="customActive" 
-          id="recepies"
+          <a routerLink="/recipes" routerLinkActive="customActive" id="recepies"
             >Recepies</a
           >
         </li>
@@ -23,7 +20,26 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <button class="btn btn-primary" style="margin-top: 8px;" routerLink="auth">Login</button>
+        <li>
+          <button
+          *ngIf="!isAuthenticated"
+            class="btn btn-primary"
+            style="margin-top: 8px; margin-right: 8px;"
+            routerLink="auth"
+          >
+            Login
+          </button>
+        </li>
+        <li>
+          <button
+          *ngIf="isAuthenticated"
+            class="btn btn-danger"
+            style="margin-top: 8px"
+            routerLink="home"
+          >
+            Log out
+          </button>
+        </li>
       </ul>
     </div>
   </div>
